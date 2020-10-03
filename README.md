@@ -1,30 +1,36 @@
-Приложение было создано при помощи react-native init
-# Архитектура приложения
+The application was created with react-native init
+# Application Architecture
 
-В корневой директории есть папка [/src](https://github.com/animmore/camvi/tree/master/src)
+There is a folder in the root directory [/src](https://github.com/animmore/camvi/tree/master/src)
 
-```/src/components``` - компоненты приложения
+```/src/components``` - application components
 
-```/src/navigation``` - навигация приложения
+```/src/navigation``` - application navigation
 
-```/src/pages``` - страницы приложения
+```/src/pages``` - application pages
 
-```/src/store``` -  actions, reducers для управления состоянием приложения при помощи Redux
+```/src/store``` -  actions, reducers to manage the state of the application with Redux
 
-# Инструкция по запуску приложения
+# Instruction to start the application
 
-## Перед началом работы:
+## Before you start working:
 git clone https://github.com/animmore/camvi.git
+
 cd ./camvi/
 
-## Запуск приложения 
+## Launching the application:
 cd ./camvi/
 
 npm install
 
-react-native start 
+- Android Studio: 
+1. In Android Studio open folder /android of application
+2. Open emulator`s AVD
+3. Open Advanced Settings
+4. Camera -> Back -> Emulated
+5. Finish 
+6. Run 'app'
 
-1. В Android Studio открыть папку /android проекта
-2. Run 'app'
+react-native start 
 
 
