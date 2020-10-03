@@ -6,14 +6,15 @@ import {
   View,
   ActivityIndicator,
 } from 'react-native';
+import { useDispatch } from 'react-redux';
 import { RNCamera } from 'react-native-camera';
 import { Screen } from '../../componenents/Screen';
+import { setVideos } from '../../store/actions/actions';
 
 export default function RecordPage() {
+  const dispatch = useDispatch();
   const [recording, setRecording] = useState(false);
   const [processing, setProcessing] = useState(false);
-
-  const [videos, setVideos] = useState([]);
 
   const reference = useRef();
 
@@ -36,7 +37,8 @@ export default function RecordPage() {
     if (uri) {
       setProcessing(false);
 
-      setVideos([...videos, uri]);
+      // setVideos([...videos, uri]);
+      dispatch(setVideos(uri));
     }
   };
 
