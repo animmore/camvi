@@ -19,7 +19,9 @@ cd ./camvi/
 
 ## Запуск приложения 
 cd ./camvi/
+
 npm install
+
 react-native start 
 
 1. В Android Studio открыть папку /android проекта
