@@ -1,5 +1,11 @@
 import React from 'react';
-import { SafeAreaView, View, StyleSheet, StatusBar } from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  StyleSheet,
+  StatusBar,
+  Platform,
+} from 'react-native';
 
 export function Screen({ children, style }) {
   return (
@@ -11,7 +17,7 @@ export function Screen({ children, style }) {
 
 const styles = StyleSheet.create({
   screen: {
-    paddingTop: StatusBar.currentHeight,
+    paddingTop: Platform.OS === 'ios' ? StatusBar.currentHeight : 0,
     flex: 1,
   },
   view: {
