@@ -10,3 +10,19 @@
 ```/src/pages``` - страницы приложения
 
 ```/src/store``` -  actions, reducers для управления состоянием приложения при помощи Redux
+
+# Инструкция по запуску приложения
+
+## Перед началом работы:
+git clone https://github.com/animmore/camvi.git
+cd ./camvi/
+
+## Запуск приложения 
+cd ./camvi/
+npm install
+react-native start 
+
+1. В Android Studio открыть папку /android проекта
+2. Run 'app'
+
+
