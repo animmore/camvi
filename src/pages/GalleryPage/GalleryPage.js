@@ -1,23 +1,16 @@
-import React, { useState, useRef } from 'react';
-import {
-  StyleSheet,
-  Text,
-  Dimensions,
-  View,
-  TouchableOpacity,
-} from 'react-native';
+import React, { useState, useRef, Fragment } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
 import Video from 'react-native-video';
 import { Screen } from '../../componenents/Screen';
 import { AppModal } from '../../componenents/AppModal';
+import { AppButton } from '../../componenents/AppButton';
 
-const { width } = Dimensions.get('window');
-
-export default function GalleryPage() {
-  const [paused, setPaused] = useState(false);
+export default function GalleryPage({ navigation }) {
   const [visibleModal, setVisibleModal] = useState(false);
+  const [recordNewVideo, setRecordNewVideo] = useState(false);
 
-  const mydataf = useSelector((state) => state.videos);
+  const myVids = useSelector((state) => state.videos);
 
   const reference = useRef();
 
@@ -25,20 +18,26 @@ export default function GalleryPage() {
     setVisibleModal(!visibleModal);
   };
 
+  const handleGoToRecord = () => {
+    setRecordNewVideo(true);
+
+    navigation.navigate('Recorder');
+  };
+
   const labels =
-    mydataf &&
-    mydataf.data &&
-    mydataf.data.map((item, index) => {
+    myVids &&
+    myVids.data &&
+    myVids.data.map((item, index) => {
       return (
-        <>
+        <Fragment key={Math.random()}>
           <TouchableOpacity
-            key={Math.random()}
-            onPress={handleVisibleModal.bind(null, item)}>
+            onPress={handleVisibleModal.bind(null, item)}
+            style={styles.labelButton}>
             <Text>Video num {index + 1} </Text>
           </TouchableOpacity>
           <AppModal
             visible={visibleModal}
-            hideModal={handleVisibleModal}
+            hideModal={handleVisibleModal.bind(null, item)}
             child={
               <Video
                 source={{ uri: item }}
@@ -50,27 +49,44 @@ export default function GalleryPage() {
               />
             }
           />
-        </>
+        </Fragment>
       );
     });
 
   return (
     <Screen style={styles.container}>
-      {mydataf && mydataf.data && mydataf.data.length > 0 ? (
+      {myVids && myVids.data && myVids.data.length > 0 ? (
         <View style={styles.labelsWrapper}>{labels}</View>
       ) : (
-        <Text>Empty</Text>
+        <Text style={styles.emptyLabel}>Empty</Text>
       )}
+      <AppButton onPress={handleGoToRecord} label="RECORD NEW VIDEO" />
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+  },
   labelsWrapper: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     alignItems: 'center',
+  },
+  emptyLabel: {
+    alignSelf: 'center',
+  },
+  recordBtn: {
+    alignSelf: 'center',
+  },
+  labelButton: {
+    margin: '1%',
+    width: '31%',
+    height: '10%',
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

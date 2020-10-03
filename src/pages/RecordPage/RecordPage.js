@@ -1,74 +1,50 @@
-import React, { useState, useRef } from 'react';
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  ActivityIndicator,
-} from 'react-native';
+import React, { useState, useRef, useEffect } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { RNCamera } from 'react-native-camera';
 import { Screen } from '../../componenents/Screen';
+import { AppButton } from '../../componenents/AppButton';
 import { setVideos } from '../../store/actions/actions';
 
 export default function RecordPage() {
   const dispatch = useDispatch();
   const [recording, setRecording] = useState(false);
-  const [processing, setProcessing] = useState(false);
 
   const reference = useRef();
-
-  const PendingView = () => (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: 'lightgreen',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
-      <Text>Waiting</Text>
-    </View>
-  );
 
   const startRecording = async (camera) => {
     setRecording(true);
     const { uri, codec = 'mp4' } = await camera.recordAsync();
 
     if (uri) {
-      setProcessing(false);
-
-      // setVideos([...videos, uri]);
       dispatch(setVideos(uri));
     }
   };
 
   const stopRecordingVideo = (camera) => {
     camera.stopRecording();
-    setProcessing(true);
+
     setRecording(false);
   };
 
   let button = (
-    <TouchableOpacity onPress={() => startRecording(camera)}>
-      <Text style={styles.capture}>Start recording</Text>
-    </TouchableOpacity>
+    <AppButton onPress={() => startRecording(camera)} label="Start recording" />
   );
 
   if (recording) {
     button = (
-      <TouchableOpacity onPress={() => stopRecordingVideo(camera)}>
-        <Text style={styles.capture}>Stop recording</Text>
-      </TouchableOpacity>
+      <AppButton
+        onPress={() => stopRecordingVideo(camera)}
+        label="Stop recording"
+      />
     );
   }
 
-  if (processing) {
-    button = (
-      <View>
-        <ActivityIndicator animating size={18} />
-      </View>
-    );
-  }
+  const PendingView = () => (
+    <View style={styles.waitWrapper}>
+      <Text style={styles.waitText}>Waiting</Text>
+    </View>
+  );
 
   return (
     <Screen style={styles.container}>
@@ -125,5 +101,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     alignSelf: 'center',
     margin: 20,
+  },
+  waitWrapper: {
+    flex: 1,
+    width: '100%',
+    backgroundColor: 'grey',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  waitText: {
+    color: 'white',
   },
 });

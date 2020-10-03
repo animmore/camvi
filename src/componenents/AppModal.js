@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Modal, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Modal, View, Text } from 'react-native';
+import { AppButton } from './AppButton';
 
 export function AppModal({ visible, child, hideModal }) {
   return (
@@ -7,9 +8,7 @@ export function AppModal({ visible, child, hideModal }) {
       <View style={styles.container}>
         <View style={styles.mockChild}>{child}</View>
         <View style={styles.wrapperBtn}>
-          <TouchableOpacity onPress={hideModal}>
-            <Text>Close</Text>
-          </TouchableOpacity>
+          <AppButton onPress={hideModal} label="Close" />
         </View>
       </View>
     </Modal>
@@ -20,15 +19,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: 'orange',
   },
   wrapperBtn: {
-    backgroundColor: 'red',
+    flex: 1,
     justifyContent: 'flex-end',
   },
   mockChild: {
     width: '100%',
-    height: '80%',
+    height: '90%',
     backgroundColor: 'black',
   },
 });
