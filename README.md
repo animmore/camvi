@@ -3,7 +3,7 @@
 
 В корневой директории есть папка [/src](https://github.com/animmore/camvi/tree/master/src)
 
-```bash /src/components ``` - компоненты приложения
+```/src/components ``` - компоненты приложения
 ```bash
 /src/navigation
 ``` - навигация приложения
