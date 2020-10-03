@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { RNCamera } from 'react-native-camera';
-import { Screen } from '../../componenents/Screen';
-import { AppButton } from '../../componenents/AppButton';
+import { Screen } from '../../components/Screen';
+import { AppButton } from '../../components/AppButton';
 import { setVideos } from '../../store/actions/actions';
 
 export default function RecordPage() {

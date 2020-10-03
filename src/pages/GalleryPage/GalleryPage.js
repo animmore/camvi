@@ -2,9 +2,9 @@ import React, { useState, useRef, Fragment } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
 import Video from 'react-native-video';
-import { Screen } from '../../componenents/Screen';
-import { AppModal } from '../../componenents/AppModal';
-import { AppButton } from '../../componenents/AppButton';
+import { Screen } from '../../components/Screen';
+import { AppModal } from '../../components/AppModal';
+import { AppButton } from '../../components/AppButton';
 
 export default function GalleryPage({ navigation }) {
   const [visibleModal, setVisibleModal] = useState(false);
